@@ -12,6 +12,8 @@ Will be using Citi's New York City's [bikers data feed](https://www.citibikenyc.
 
 Endpoints listed here: http://gbfs.citibikenyc.com/gbfs/gbfs.json
 
+Specifications listed here: https://github.com/NABSA/gbfs/blob/master/gbfs.md#system_informationjson
+
 ### env
 
 - `conda create etl`
