@@ -1,8 +1,10 @@
 ## ETL
 
-Experimenting with ETLs using Python, starting with:
+Experimenting with ETLs using Python, starting with an ETL process to:
 
-- creating a pipeline using Pandas
+- retreive data using `requests`
+- manipulate date using `Pandas`
+- write to a database using `BigQuery`
 
 ### env
 
