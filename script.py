@@ -18,7 +18,11 @@ def test_endpoint():
     '''
     req = requests.get(url)
 
-    return req
+    if req.status_code != 200:
+        return "Nope"
+        gc.collect()
+        sys.exit()
+    return "All good"
 
 
 ############------------ DRIVER CODE ------------############
