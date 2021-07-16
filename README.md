@@ -19,3 +19,5 @@ Specifications listed here: https://github.com/NABSA/gbfs/blob/master/gbfs.md#sy
 - `conda create etl`
 - `conda activate etl`
 - `conda install pandas`
+
+"To use the BigQuery API, you must first authenticate to verify your client's identity." --> [documentation](https://cloud.google.com/bigquery/docs/authentication/)
