@@ -16,9 +16,12 @@ def test_endpoint():
      creates and makes a request, 
      returns whether or not connection is successful
     '''
-    pass
+    req = requests.get(url)
+
+    return req
 
 
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
-    test_endpoint()
+    print(test_endpoint())
+    # <Response [200]>
