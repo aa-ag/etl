@@ -14,12 +14,14 @@ from google.oauth2 import service_account
 import settings
 
 ############------------ GLOBAL VARIABLE(S) ------------############
-url = settings.gbfs_end_point
+gbfs_station_information = settings.gbfs_end_point
 path_to_bigquery_key = settings.bigquery_account_key_path
 
 
 ############------------ FUNCTION(S) ------------############
 ### API
+print(gbfs_station_information)
+
 def test_endpoint():
     '''
      creates and makes a request, 
