@@ -19,6 +19,22 @@ path_to_bigquery_key = settings.bigquery_account_key_path
 
 
 ############------------ FUNCTION(S) ------------############
+### API
+def test_endpoint():
+    '''
+     creates and makes a request, 
+     returns whether or not connection is successful
+    '''
+    req = requests.get(url)
+
+    if req.status_code != 200:
+        return "Nope"
+        gc.collect()
+        sys.exit()
+    return "All good"
+
+
+### Big Query
 def query_stackoverflow():
     '''
      sample code from docs to test connection
@@ -65,27 +81,16 @@ def big_query_authentication():
     print(client)
 
 
-def test_endpoint():
-    '''
-     creates and makes a request, 
-     returns whether or not connection is successful
-    '''
-    req = requests.get(url)
-
-    if req.status_code != 200:
-        return "Nope"
-        gc.collect()
-        sys.exit()
-    return "All good"
-
-
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
+    # API
     # print(test_endpoint())
     # <Response [200]>
+
+    ### Big Query
     # big_query_authentication()
     # <google.cloud.bigquery.client.Client object at 0x7fb442242f40>
-    query_stackoverflow()
+    # query_stackoverflow()
     '''
     https://stackoverflow.com/questions/35159967 : 98375 views
     https://stackoverflow.com/questions/22879669 : 93709 views
