@@ -20,20 +20,24 @@ path_to_bigquery_key = settings.bigquery_account_key_path
 
 ############------------ FUNCTION(S) ------------############
 ### API
-print(gbfs_station_information)
-
 def test_endpoint():
     '''
      creates and makes a request, 
      returns whether or not connection is successful
     '''
-    req = requests.get(url)
+    global gbfs_station_information
+
+    req = requests.get(gbfs_station_information)
 
     if req.status_code != 200:
         return "Nope"
         gc.collect()
         sys.exit()
     return "All good"
+
+
+def generate_dataframe():
+    pass
 
 
 ### Big Query
@@ -86,7 +90,7 @@ def big_query_authentication():
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
     # API
-    # print(test_endpoint())
+    print(test_endpoint())
     # <Response [200]>
 
     ### Big Query
