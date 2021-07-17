@@ -1,14 +1,17 @@
 ############------------ IMPORTS ------------############
+### Python
 import sys
 import gc
 import datetime
 import requests
 import pandas as pd
 from pandas.io.json import json_normalize
-import settings
 import json
+### Big Query
 from google.cloud import bigquery
 from google.oauth2 import service_account
+### Project
+import settings
 
 ############------------ GLOBAL VARIABLE(S) ------------############
 url = settings.gbfs_end_point
