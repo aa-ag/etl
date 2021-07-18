@@ -3,7 +3,7 @@
 Experimenting with ETLs using Python; starting with an ETL process to:
 
 - retreive data using `requests`
-- manipulate date using `Pandas`
+- manipulate data using `Pandas`
 - write to a database using `BigQuery`
 
 ## data

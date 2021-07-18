@@ -14,11 +14,12 @@ from google.oauth2 import service_account
 import settings
 
 ############------------ GLOBAL VARIABLE(S) ------------############
+### settings.py
 gbfs_station_information = settings.gbfs_end_point
 path_to_bigquery_key = settings.bigquery_account_key_path
 bq_ds_tbl_id = settings.big_query_data_set_and_table_ids
 project_id = settings.projectid
-
+### key.json
 key_file = open('etlproject.json')
 key = json.load(key_file)
 
