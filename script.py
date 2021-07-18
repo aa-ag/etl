@@ -56,7 +56,6 @@ def generate_dataframe():
     print("Last updated: " + str(dt_object) + '\n')
 
     stations = req['data']['stations']
-    print(stations[0])
     df = json_normalize(stations)
     df['last_system_update_date'] = dt_object
     df['insertion_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -73,15 +72,12 @@ def write_data_to_database():
     global bq_ds_tbl_id
 
     df = generate_dataframe()
-    print(df.columns)
 
     df = df.rename(columns={'rental_uris.ios':'rental_uris_ios', 
     'rental_uris.android': 'rental_uris_android'})
 
-    print(df.columns)
-
-    # df.to_gbq(bq_ds_tbl_id, project_id)
-    # print("All set")
+    df.to_gbq(bq_ds_tbl_id, project_id)
+    print("All set")
 
 
 ### Big Query
