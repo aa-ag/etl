@@ -63,10 +63,15 @@ def generate_dataframe():
 
 
 def write_data_to_database(df):
+    '''
+     localizes variables `key` and `projectid`
+     and writes data in form of dataframe to db
+    '''
     global key
     global table_id
     projectid = key['project_id']
     df.to_gbq(table_id, project_id=projectid)
+    print("All set")
 
 
 ### Big Query
