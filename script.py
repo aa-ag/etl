@@ -16,7 +16,6 @@ import settings
 ############------------ GLOBAL VARIABLE(S) ------------############
 gbfs_station_information = settings.gbfs_end_point
 path_to_bigquery_key = settings.bigquery_account_key_path
-table_id = settings.full_table_id
 
 key_file = open('etlproject.json')
 key = json.load(key_file)
@@ -62,16 +61,28 @@ def generate_dataframe():
     return df
 
 
-def write_data_to_database(df):
+def write_data_to_database():
     '''
      localizes variables `key` and `projectid`
      and writes data in form of dataframe to db
     '''
     global key
     global table_id
-    projectid = key['project_id']
-    df.to_gbq(table_id, project_id=projectid)
-    print("All set")
+
+    df = generate_dataframe()
+
+    credentials = service_account.Credentials.from_service_account_file(
+        path_to_bigquery_key, scopes=["https://www.googleapis.com/auth/cloud-platform"],
+    )
+
+    client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
+
+    dataset = client.create_dataset('etl_dataset')
+    table = dataset.table('etl_table')
+
+    print(dataset, table)
+    # client.load_table_from_dataframe(df, table_id)
+    # print("All set")
 
 
 ### Big Query
@@ -118,7 +129,7 @@ def big_query_authentication():
 
     client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
 
-    print(client)
+    # print(client)
 
 
 ############------------ DRIVER CODE ------------############
@@ -138,4 +149,4 @@ if __name__ == "__main__":
     '''
     # generate_dataframe()
     # Last updated: 2021-07-18 11:42:45
-    # write_data_to_database()
+    write_data_to_database()
