@@ -56,6 +56,7 @@ def generate_dataframe():
     print("Last updated: " + str(dt_object) + '\n')
 
     stations = req['data']['stations']
+    print(stations[0])
     df = json_normalize(stations)
     df['last_system_update_date'] = dt_object
     df['insertion_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -72,9 +73,10 @@ def write_data_to_database():
     global bq_ds_tbl_id
 
     df = generate_dataframe()
+    print(df.columns)
 
-    df.to_gbq(bq_ds_tbl_id, project_id)
-    print("All set")
+    # df.to_gbq(bq_ds_tbl_id, project_id)
+    # print("All set")
 
 
 ### Big Query
@@ -89,7 +91,7 @@ def big_query_authentication():
 
     client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
 
-    # print(client)
+    print(client)
 
 
 ############------------ DRIVER CODE ------------############
@@ -103,4 +105,4 @@ if __name__ == "__main__":
     # <google.cloud.bigquery.client.Client object at 0x7fb442242f40>
     # generate_dataframe()
     # Last updated: 2021-07-18 11:42:45
-    # write_data_to_database()
+    write_data_to_database()
