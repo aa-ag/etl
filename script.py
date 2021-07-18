@@ -17,6 +17,9 @@ import settings
 gbfs_station_information = settings.gbfs_end_point
 path_to_bigquery_key = settings.bigquery_account_key_path
 
+key_file = open('etlproject.json')
+key = json.load(key_file)
+print(key)
 
 ############------------ FUNCTION(S) ------------############
 ### GBFS API
@@ -58,8 +61,10 @@ def generate_dataframe():
     return df
 
 
-def write_data_to_database():
-    pass
+def write_data_to_database(df):
+    projectid = settings.project_id
+    df.to_gbq(full_table_id, project_id=project_id)
+
 
 ### Big Query
 def query_stackoverflow():
@@ -123,5 +128,6 @@ if __name__ == "__main__":
     https://stackoverflow.com/questions/22879669 : 93709 views
     https://stackoverflow.com/questions/10604135 : 92234 views
     '''
-    generate_dataframe()
+    # generate_dataframe()
     # Last updated: 2021-07-18 11:42:45
+    # write_data_to_database()
