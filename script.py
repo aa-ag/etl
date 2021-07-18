@@ -20,6 +20,8 @@ path_to_bigquery_key = settings.bigquery_account_key_path
 key_file = open('etlproject.json')
 key = json.load(key_file)
 
+bq_ds_tbl_id = settings.big_query_data_set_and_table_ids
+
 
 ############------------ FUNCTION(S) ------------############
 ### GBFS API
@@ -67,7 +69,7 @@ def write_data_to_database():
      and writes data in form of dataframe to db
     '''
     global key
-    global table_id
+    global bq_ds_tbl_id
 
     df = generate_dataframe()
 
@@ -77,12 +79,11 @@ def write_data_to_database():
 
     client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
 
-    dataset = client.create_dataset('etl_dataset')
-    table = dataset.table('etl_table')
+    # dataset = client.create_dataset('etl_dataset')
+    # table = dataset.table('etl_table')
 
-    print(dataset, table)
-    # client.load_table_from_dataframe(df, table_id)
-    # print("All set")
+    client.load_table_from_dataframe(df, bq_ds_tbl_id)
+    print("All set")
 
 
 ### Big Query
