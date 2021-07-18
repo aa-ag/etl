@@ -78,38 +78,6 @@ def write_data_to_database():
 
 
 ### Big Query
-def query_stackoverflow():
-    '''
-     sample code from docs to test connection
-     modified to use credentials
-     https://cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries
-    '''
-    
-    credentials = service_account.Credentials.from_service_account_file(
-        path_to_bigquery_key, scopes=["https://www.googleapis.com/auth/cloud-platform"],
-    )
-
-    client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
-
-    query_job = client.query(
-        """
-        SELECT
-          CONCAT(
-            'https://stackoverflow.com/questions/',
-            CAST(id as STRING)) as url,
-          view_count
-        FROM `bigquery-public-data.stackoverflow.posts_questions`
-        WHERE tags like '%google-bigquery%'
-        ORDER BY view_count DESC
-        LIMIT 3"""
-    )
-
-    results = query_job.result()  # Waits for job to complete.
-
-    for row in results:
-        print("{} : {} views".format(row.url, row.view_count))
-
-
 def big_query_authentication():
     '''
      set credentials from etlproject.json (key imported from Google Cloud)
@@ -133,12 +101,6 @@ if __name__ == "__main__":
     ### Big Query
     # big_query_authentication()
     # <google.cloud.bigquery.client.Client object at 0x7fb442242f40>
-    # query_stackoverflow()
-    '''
-    https://stackoverflow.com/questions/35159967 : 98375 views
-    https://stackoverflow.com/questions/22879669 : 93709 views
-    https://stackoverflow.com/questions/10604135 : 92234 views
-    '''
     # generate_dataframe()
     # Last updated: 2021-07-18 11:42:45
-    write_data_to_database()
+    # write_data_to_database()
