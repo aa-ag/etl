@@ -39,8 +39,10 @@ def generate_request():
     return req.json()
 
 
-def generate_dataframe(req):
-    pass
+def generate_dataframe():
+    req = generate_request()
+    stations = req['data']['stations']
+    print(stations[0])
 
 
 ### Big Query
@@ -105,3 +107,4 @@ if __name__ == "__main__":
     https://stackoverflow.com/questions/22879669 : 93709 views
     https://stackoverflow.com/questions/10604135 : 92234 views
     '''
+    generate_dataframe()
