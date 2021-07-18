@@ -19,7 +19,7 @@ path_to_bigquery_key = settings.bigquery_account_key_path
 
 
 ############------------ FUNCTION(S) ------------############
-### API
+### GBFS API
 def generate_request():
     '''
      creates and makes a request, 
@@ -34,12 +34,16 @@ def generate_request():
         gc.collect()
         sys.exit()
     else:
-        print("Server status hows new update ")
+        print("Server status hows new update\n\n")
         pass
     return req.json()
 
 
 def generate_dataframe():
+    '''
+     first, generates request
+     then, creates dataframe with data
+    '''
     req = generate_request()
     stations = req['data']['stations']
     print(stations[0])
