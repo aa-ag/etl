@@ -75,6 +75,11 @@ def write_data_to_database():
     df = generate_dataframe()
     print(df.columns)
 
+    df = df.rename(columns={'rental_uris.ios':'rental_uris_ios', 
+    'rental_uris.android': 'rental_uris_android'})
+
+    print(df.columns)
+
     # df.to_gbq(bq_ds_tbl_id, project_id)
     # print("All set")
 
