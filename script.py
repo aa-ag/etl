@@ -16,10 +16,11 @@ import settings
 ############------------ GLOBAL VARIABLE(S) ------------############
 gbfs_station_information = settings.gbfs_end_point
 path_to_bigquery_key = settings.bigquery_account_key_path
+table_id = settings.full_table_id
 
 key_file = open('etlproject.json')
 key = json.load(key_file)
-print(key)
+
 
 ############------------ FUNCTION(S) ------------############
 ### GBFS API
@@ -62,8 +63,10 @@ def generate_dataframe():
 
 
 def write_data_to_database(df):
-    projectid = settings.project_id
-    df.to_gbq(full_table_id, project_id=project_id)
+    global key
+    global table_id
+    projectid = key['project_id']
+    df.to_gbq(table_id, project_id=projectid)
 
 
 ### Big Query
