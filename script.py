@@ -2,7 +2,7 @@
 ### Python
 import sys
 import gc
-import datetime
+from datetime import datetime, timezone
 import requests
 import pandas as pd
 from pandas.io.json import json_normalize
@@ -45,8 +45,12 @@ def generate_dataframe():
      then, creates dataframe with data
     '''
     req = generate_request()
+    
     stations = req['data']['stations']
-    print(stations[0])
+    last_updated = req['last_updated']
+
+    dt_object = datetime.fromtimestamp(last_updated).strftime('%Y-%m-%d %H:%M:%S')
+    print("Last updated: " + str(dt_object))
 
 
 ### Big Query
@@ -112,18 +116,4 @@ if __name__ == "__main__":
     https://stackoverflow.com/questions/10604135 : 92234 views
     '''
     generate_dataframe()
-    '''
-    Server status hows new update 
-    
-    {'electric_bike_surcharge_waiver': False, 
-    'eightd_has_key_dispenser': False, 'eightd_station_services': [],
-     'region_id': '71', 'station_type': 'classic', 
-     'station_id': '72', 'lon': -73.99392888, 
-     'lat': 40.76727216, 'legacy_id': '72', 
-     'external_id': '66db237e-0aca-11e7-82f6-3863bb44ef7c', 
-     'has_kiosk': True, 'name': 'W 52 St & 11 Ave', 
-     'rental_methods': ['KEY', 'CREDITCARD'], 
-     'capacity': 55, 
-     'rental_uris': {'android': 'https://bkn.lft.to/lastmile_qr_scan', 
-     'ios': 'https://bkn.lft.to/lastmile_qr_scan'}, 'short_name': '6926.01'}
-    '''
+    # Last updated: 2021-07-18 11:42:45
