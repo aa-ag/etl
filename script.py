@@ -58,6 +58,9 @@ def generate_dataframe():
     return df
 
 
+def write_data_to_database():
+    pass
+
 ### Big Query
 def query_stackoverflow():
     '''
