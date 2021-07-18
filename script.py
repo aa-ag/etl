@@ -2,10 +2,10 @@
 ### Python
 import sys
 import gc
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import requests
 import pandas as pd
-from pandas.io.json import json_normalize
+from pandas import json_normalize
 import json
 ### Big Query
 from google.cloud import bigquery
@@ -34,7 +34,7 @@ def generate_request():
         gc.collect()
         sys.exit()
     else:
-        print("Server status hows new update\n\n")
+        print("Server status hows new update\n")
         pass
     return req.json()
 
@@ -46,11 +46,16 @@ def generate_dataframe():
     '''
     req = generate_request()
     
-    stations = req['data']['stations']
     last_updated = req['last_updated']
-
     dt_object = datetime.fromtimestamp(last_updated).strftime('%Y-%m-%d %H:%M:%S')
-    print("Last updated: " + str(dt_object))
+    print("Last updated: " + str(dt_object) + '\n')
+
+    stations = req['data']['stations']
+    df = json_normalize(stations)
+    df['last_system_update_date'] = dt_object
+    df['insertion_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print("Data for insertion constructed\n")
+    return df
 
 
 ### Big Query
