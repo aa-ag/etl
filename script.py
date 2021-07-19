@@ -96,6 +96,14 @@ def big_query_authentication():
     print(client)
 
 
+def test_data():
+    '''
+     testing data quality before loading it
+     to table to avoid duplicates
+    '''
+    pass
+
+
 ############------------ DRIVER CODE ------------############
 if __name__ == "__main__":
     # API
