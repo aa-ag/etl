@@ -114,7 +114,13 @@ def check_version():
     
     last_updated = datetime.fromtimestamp(req['last_updated']).strftime('%Y-%m-%d %H:%M:%S')
 
-    return last_system_update_date, last_updated
+    if last_system_update_date > last_updated:
+        print("\nNo data was inserted; dupes present.")
+        gc.collect()
+        sys.exit()
+    print("\nNo dupes present; data added.")
+    write_data_to_database()
+    return 
 
 
 ############------------ DRIVER CODE ------------############
@@ -130,6 +136,3 @@ if __name__ == "__main__":
     # Last updated: 2021-07-18 11:42:45
     # write_data_to_database()
     print(check_version())
-    '''
-    ('2021-07-18 12:55:40', '2021-07-19 18:13:55')
-    '''
