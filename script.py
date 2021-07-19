@@ -37,7 +37,7 @@ def generate_request():
     req = requests.get(gbfs_station_information)
 
     if req.status_code != 200:
-        return "Nope"
+        print("Nope")
         gc.collect()
         sys.exit()
     else:
@@ -106,16 +106,15 @@ def check_version():
 
     read_query = f"""SELECT max(last_system_update_date) as last_system_update_date FROM {bq_ds_tbl_id}"""
 
-    last_system_update_date = pd.read_gbq(read_query, project_id=project_id)
+    data_from_read_query = pd.read_gbq(read_query, project_id=project_id)
+
+    last_system_update_date = data_from_read_query['last_system_update_date'][0]
 
     req = generate_request()
     
     last_updated = datetime.fromtimestamp(req['last_updated']).strftime('%Y-%m-%d %H:%M:%S')
 
     return last_system_update_date, last_updated
-
-
-
 
 
 ############------------ DRIVER CODE ------------############
@@ -132,6 +131,5 @@ if __name__ == "__main__":
     # write_data_to_database()
     print(check_version())
     '''
-     (  last_system_update_date
-      0     2021-07-18 12:55:40, '2021-07-19 18:08:35')
+    ('2021-07-18 12:55:40', '2021-07-19 18:13:55')
     '''
