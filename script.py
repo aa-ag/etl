@@ -108,7 +108,11 @@ def check_version():
 
     last_system_update_date = pd.read_gbq(read_query, project_id=project_id)
 
-    return last_system_update_date
+    req = generate_request()
+    
+    last_updated = datetime.fromtimestamp(req['last_updated']).strftime('%Y-%m-%d %H:%M:%S')
+
+    return last_system_update_date, last_updated
 
 
 
@@ -127,5 +131,7 @@ if __name__ == "__main__":
     # Last updated: 2021-07-18 11:42:45
     # write_data_to_database()
     print(check_version())
-    # last_system_update_date
-    #0     2021-07-18 12:55:40
+    '''
+     (  last_system_update_date
+      0     2021-07-18 12:55:40, '2021-07-19 18:08:35')
+    '''
