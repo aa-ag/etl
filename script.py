@@ -3,6 +3,7 @@
 import sys
 import gc
 from datetime import date, datetime, timezone
+from pandas.io.gbq import read_gbq
 import requests
 import pandas as pd
 from pandas import json_normalize
@@ -96,12 +97,21 @@ def big_query_authentication():
     print(client)
 
 
-def test_data():
+def check_version():
     '''
      testing data quality before loading it
      to table to avoid duplicates
     '''
-    pass
+    global project_id
+
+    read_query = f"""SELECT max(last_system_update_date) as last_system_update_date FROM {bq_ds_tbl_id}"""
+
+    last_system_update_date = pd.read_gbq(read_query, project_id=project_id)
+
+    return last_system_update_date
+
+
+
 
 
 ############------------ DRIVER CODE ------------############
@@ -115,4 +125,5 @@ if __name__ == "__main__":
     # <google.cloud.bigquery.client.Client object at 0x7fb442242f40>
     # generate_dataframe()
     # Last updated: 2021-07-18 11:42:45
-    write_data_to_database()
+    # write_data_to_database()
+    print(check_version())
