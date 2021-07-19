@@ -127,3 +127,5 @@ if __name__ == "__main__":
     # Last updated: 2021-07-18 11:42:45
     # write_data_to_database()
     print(check_version())
+    # last_system_update_date
+    #0     2021-07-18 12:55:40
